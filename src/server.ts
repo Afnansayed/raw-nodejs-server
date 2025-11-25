@@ -30,13 +30,3 @@ const server: Server = http.createServer(
 server.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);
 });
-
-// if (req.url === '/' && req.method === 'GET') {
-//   res.writeHead(200, { 'content-type': 'application/json' });
-//   res.end(
-//     JSON.stringify({
-//       message: 'Hello from node js with typescript live server...',
-//       path: req.url,
-//     })
-//   );
-// }

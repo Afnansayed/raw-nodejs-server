@@ -7,3 +7,10 @@ addRoute('GET', '/', (req, res) => {
     path: req.url,
   });
 });
+
+addRoute('GET', '/api', (req, res) => {
+  sendJson(res, 200, {
+    message: 'Health status ok',
+    path: req.url,
+  });
+});
