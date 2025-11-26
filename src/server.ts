@@ -2,6 +2,7 @@ import http, { IncomingMessage, Server, ServerResponse } from 'http';
 import config from './confiq';
 import { routes } from './helpers/RoutesHandler';
 import './routes';
+import dynamicRouteHandler from './helpers/dynamicRouteHandler';
 
 const server: Server = http.createServer(
   (req: IncomingMessage, res: ServerResponse) => {
@@ -13,6 +14,11 @@ const server: Server = http.createServer(
 
     if (handler) {
       handler(req, res);
+    } else if (dynamicRouteHandler(method, path)) {
+      // Handle dynamic routes
+      const match = dynamicRouteHandler(method, path);
+      (req as any).params = match?.params;
+      match?.handler(req, res);
     } else {
       res.writeHead(404, { 'content-type': 'application/json' });
       res.end(
